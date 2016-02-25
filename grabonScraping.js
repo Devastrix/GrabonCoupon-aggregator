@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
     // parse application/x-www-form-urlencoded
     app.use(bodyParser.urlencoded({ extended: true }));
+var compName;
 
 
 app.get('/', function(req, res) {
@@ -17,7 +18,7 @@ app.get('/', function(req, res) {
 });
 app.post('/scrape', function(req, res){
     console.log(req.body.user.name);
-    var compName = req.body.user.name;
+    compName = req.body.user.name;
 
 url = 'http://www.grabon.in/'+compName+'-coupons/';
 
@@ -75,7 +76,7 @@ request(url, function(error, response, html){
 // Parameter 2 :  JSON.stringify(json, null, 4) - the data to write, here we do an extra step by calling JSON.stringify to make our JSON easier to read
 // Parameter 3 :  callback function - a callback function to let us know the status of our function
 
-fs.writeFile('grabonOutput.json', JSON.stringify(arr, null, 4), function(err){
+fs.writeFile('output/'+compName+'.json', JSON.stringify(arr, null, 4), function(err){
 
     console.log('File successfully written! - Check your project directory for the grabonOutput.json file');
 
