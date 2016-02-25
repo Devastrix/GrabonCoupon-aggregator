@@ -78,7 +78,7 @@ request(url, function(error, response, html){
 
 fs.writeFile('output/'+compName+'.json', JSON.stringify(arr, null, 4), function(err){
 
-    console.log('File successfully written! - Check your project directory for the grabonOutput.json file');
+    console.log('File successfully written! - Check your output directory for the '+compName+'.json file');
 
 })
 
