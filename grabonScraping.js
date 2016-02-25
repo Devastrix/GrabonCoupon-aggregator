@@ -13,14 +13,14 @@ var compName;
 
 
 app.get('/', function(req, res) {
-    res.send("<html><head><title>Schedule</title></head><body><h1>Schedule</h1><br/><form action='/scrape' method='POST'><input type='text' value='' name='user[name]'><input type='submit' value='Enter'></form></body></html>")
+    res.send("<html><head><title>Coupon Aggregator</title></head><body><h1>Schedule</h1><br/><form action='/scrape' method='POST'><input type='text' value='' name='user[name]'><input type='submit' value='Enter'></form></body></html>")
 
 });
 app.post('/scrape', function(req, res){
     console.log(req.body.user.name);
     compName = req.body.user.name;
 
-url = 'http://www.grabon.in/'+compName+'-coupons/';
+url = 'http://www.grabon.in/'+compName.trim()+'-coupons/';
 
 request(url, function(error, response, html){
     if(!error){
