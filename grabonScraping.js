@@ -3,10 +3,23 @@ var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
+var bodyParser = require('body-parser');
+    // parse application/json
+    app.use(bodyParser.json());                        
 
-app.get('/scrape', function(req, res){
+    // parse application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: true }));
 
-url = 'http://www.grabon.in/olacabs-coupons/';
+
+app.get('/', function(req, res) {
+    res.send("<html><head><title>Schedule</title></head><body><h1>Schedule</h1><br/><form action='/scrape' method='POST'><input type='text' value='' name='user[name]'><input type='submit' value='Enter'></form></body></html>")
+
+});
+app.post('/scrape', function(req, res){
+    console.log(req.body.user.name);
+    var compName = req.body.user.name;
+
+url = 'http://www.grabon.in/'+compName+'-coupons/';
 
 request(url, function(error, response, html){
     if(!error){
