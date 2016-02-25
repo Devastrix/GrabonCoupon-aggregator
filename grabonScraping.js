@@ -21,12 +21,17 @@ request(url, function(error, response, html){
        var data = $(this).find('.h3_click').text();
        
        var coupon = $(this).find('small').text();
-       
+       var time = $(this).find('.list-inline.coupon-extras')
+       .children()
+       .first()
+       .text();
+       //console.log(time);
        // json.title = data;
        // json.rating = coupon;
        var json = {
         title : data,
-        code : coupon
+        code : coupon,
+        time : time.trim()
        }
        if(coupon.trim() !== "")
         arr.push(json);
@@ -59,7 +64,7 @@ request(url, function(error, response, html){
 
 fs.writeFile('grabonOutput.json', JSON.stringify(arr, null, 4), function(err){
 
-    console.log('File successfully written! - Check your project directory for the output.json file');
+    console.log('File successfully written! - Check your project directory for the grabonOutput.json file');
 
 })
 
@@ -70,6 +75,6 @@ res.send('Check your console!')
 })
 app.listen('8080')
 
-console.log('Magic happens on port 8081');
+console.log('Magic happens on port 8080');
 
 exports = module.exports = app; 
