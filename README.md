@@ -9,7 +9,7 @@ Do following steps to run the code
 
 3)Now run the code by typing "node grabonScraping.js" in the terminal
 
-4) open "localhost:8080/scrape" in your browser 
+4) open "localhost:8080/" in your browser and type the entity name for which you want the coupons
 
 5) Check the grabonOutput.json file for output
 
