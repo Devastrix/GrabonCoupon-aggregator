@@ -13,7 +13,7 @@ var compName;
 
 
 app.get('/', function(req, res) {
-    res.send("<html><head><title>Coupon Aggregator</title></head><body><h1>Schedule</h1><br/><form action='/scrape' method='POST'><input type='text' value='' name='user[name]'><input type='submit' value='Enter'></form></body></html>")
+    res.send("<html><head><title>Coupon Aggregator</title></head><body><h1>Coupon Aggregator</h1><br/><form action='/scrape' method='POST'><input type='text' value='' name='user[name]'><input type='submit' value='Enter'></form></body></html>")
 
 });
 app.post('/scrape', function(req, res){
@@ -35,6 +35,8 @@ request(url, function(error, response, html){
        var data = $(this).find('.h3_click').text();
        
        var coupon = $(this).find('small').text();
+       var det = $(this).find('.coupon-description').text();
+     //  console.log(det);
        var time = $(this).find('.list-inline.coupon-extras')
        .children()
        .first()
@@ -44,6 +46,7 @@ request(url, function(error, response, html){
        // json.rating = coupon;
        var json = {
         title : data,
+        details : det,
         code : coupon,
         time : time.trim()
        }
@@ -83,7 +86,7 @@ fs.writeFile('output/'+compName+'.json', JSON.stringify(arr, null, 4), function(
 })
 
 // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
-res.send('Check your console!')
+res.send("Check output folder...<a href='/'>Go Back</a>");
 
     }) ;
 })
