@@ -3,6 +3,8 @@ var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
+
+var http = require('http').createServer(app);
 var bodyParser = require('body-parser');
     // parse application/json
     app.use(bodyParser.json());                        
@@ -79,19 +81,31 @@ request(url, function(error, response, html){
 // Parameter 2 :  JSON.stringify(json, null, 4) - the data to write, here we do an extra step by calling JSON.stringify to make our JSON easier to read
 // Parameter 3 :  callback function - a callback function to let us know the status of our function
 
+
 fs.writeFile('output/'+compName+'.json', JSON.stringify(arr, null, 4), function(err){
 
     console.log('File successfully written! - Check your output directory for the '+compName+'.json file');
+    res.download(__dirname+'\\output/'+compName+'.json');
 
 })
 
 // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
-res.send("Check output folder...<a href='/'>Go Back</a>");
+//res.send("Check output folder...<a href='/'>Go Back</a>", function() {
+  
+//});
+
+
 
     }) ;
 })
-app.listen('8080')
+
+
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000// set the port
+var ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+http.listen(port, ip_address);
+//listen('8080')
 
 console.log('Magic happens on port 8080');
+
 
 exports = module.exports = app; 
