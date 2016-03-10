@@ -74,6 +74,9 @@ request(url, function(error, response, html){
     //     json.rating = rating;
     // })
 }
+else {
+  res.send(error);
+}
 
 // To write to the system we will use the built in 'fs' library.
 // In this example we will pass 3 parameters to the writeFile function
