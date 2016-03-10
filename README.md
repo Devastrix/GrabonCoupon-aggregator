@@ -17,4 +17,4 @@ Do following steps to run the code
 
 4) open "localhost:8080/" in your browser and type the entity name for which you want the coupons
 
-5) Check the output folder/"EntityName".json for output
+5) Check "output folder/EntityName".json for output
