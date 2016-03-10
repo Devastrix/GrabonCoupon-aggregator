@@ -7,6 +7,10 @@
   "scripts": {
            "start": "node server.js"
    },
+     "repository": {
+    "type": "git",
+    "url": "https://github.com/Devastrix/GrabonCoupon-aggregator"
+  },
 "dependencies" : {
     "express"    : "latest",
     "request"    : "latest",
